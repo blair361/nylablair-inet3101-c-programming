@@ -36,10 +36,10 @@ void to_base_n(unsigned long n, int base)
 
 void print_digits(unsigned long n, int base) 
 {
-  const char *symbols = "0123456789!@#$%^"
+  const char *symbols = "0123456789!@#$%^";
   int r;
   r = n % base;
   if (n >= base)
     print_digits(n / base, base);
-  putchar(symbols[r];
+  putchar(symbols[r]);
 }
