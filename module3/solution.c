@@ -1,3 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    int id; 
+    int assigned;
+    char last[30];
+    char first[30];
+} Seat;
+
+Seat seats[4][128];
+int flights[4] = {101, 102, 201, 202};
+
 void thirdMenu(int f){//function that receives the flight position f
     char choice, last[30], first[30];
     int i, j, n, num, temp, order[128];
@@ -107,4 +120,49 @@ void thirdMenu(int f){//function that receives the flight position f
         }
 
     } while (choice != 'f');
+}
+int main(void) {
+    char choice, sub;
+    int i, j, flightNum, f;
+
+    for (i = 0; i < 4; i++)// give every seat its number
+        for (j = 0; j < 128; j++)
+            seats[i][j].id = j + 1;
+
+    do {
+        printf("\nTo choose a function, enter its letter label:\n");
+        printf("First Level Menu\n");
+        printf("a. 0utbound Flight\n");
+        printf("b. Inbound Flight\n");
+        printf("c. Quit\n");
+        printf("Choice: ");
+        scanf(" %c", &choice);
+
+        if (choice == 'a' || choice == 'b') {
+            do {
+                printf("\nSecond Level Menu\n");
+                printf("a. Flight Number\n");
+                printf("b. Back to Main\n");
+                printf("Choice: ");
+                scanf(" %c", &sub);
+
+                if (sub == 'a') {
+                    flightNum = 0;
+                    printf("Enter flight number (0 to abort): ");
+                    scanf("%d", &flightNum);
+
+                    f = -1;
+                    for (i = 0; i < 4; i++)
+                        if (flights[i] == flightNum) f = i;
+
+                    if (choice == 'a' && (f == 0 || f == 1)) thirdMenu(f);
+                    else if (choice == 'b' && (f == 2 || f == 3)) thirdMenu(f);
+                    else if (flightNum != 0) printf("Invalid flight number.\n");
+                }
+            } while (sub != 'b');
+        }
+    } while (choice != 'c');
+
+    printf("Bye\n");
+    return 0;
 }
