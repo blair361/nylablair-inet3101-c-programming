@@ -1,4 +1,5 @@
 Problem Statement: The previous program I wrote for Colossus airlines didn't permanently store the reservation data and instead was last after the program ends. This code extends the previous program and stores the data in the file and when the program restarts in loads data from the file.
 
-Describe the Solution
-Pros and Cons of your solution 
+Describe the Solution: At the start of main the solution loads the data from seats.dat when the program starts. If the file exists it loads all the saved seats into the array with fread. If it doesn't exist it starts with empty seats. After each update or change it can update the file seats.dat by saving the whole array with fwrite by calling the saveSeats() function after a customer is assigned a seat or an assignment is deleted.
+
+Pros and Cons of your solution: A pro of this solution is that I saved after each update or change instead of at the end of the program which leaves nothing to save at the end and also ensures updates are saved if it crashes before the program ends. Cons: the file is binary so it cant be opened and read in a text editor. Every save rewrites all seats which could become slow for a bigger program.
